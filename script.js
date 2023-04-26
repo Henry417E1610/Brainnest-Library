@@ -41,11 +41,12 @@ class Book{
         this.red = red    
    };
    
-    toggleRed = function(){
-        if (this._red === false){
-        this._red = true;
+    toggleRed(){
+
+        if (this.red === false){
+        this.red = true;
         } else {
-            this._red = false;
+            this.red = false;
         }
     }
     
@@ -66,53 +67,39 @@ class BooksArray {
         this.#books.unshift(new Book(title.value,author.value,red.checked));
         title.value = '';
         author.value = '';
+        red.checked = true;
     };
-    loadBooks(){
+    displayBooks(){
         const container = document.getElementById('container');
         container.innerHTML = '';
 
         this.#books.forEach((book, index)=>{
-           const {author,title} = book
-           
+           const {author,title, toggleRed, red } = book
 
-           container.innerHTML += `<div data-attribute=${index} class='items'>
-                                    ${author} ${title} 
+           container.innerHTML += `<div data-attribute=${index} >
+                                    '${author} ${title}' 
                                     <button class='delete' value=${index}>delete</button>
+                                    <button class='toggle' value=${index}>
                                    </div>`
-
+           
         })
     }
-    liveAddBook(){
-        const container = document.getElementById('container');
-         const {author, title} = this.#books[0] 
-          container.innerHTML = ''
 
-         this.#books.forEach((book, index)=>{ 
-           if (index > 0){
-           container.innerHTML += `<div data-attribute=${index++} class='items'>
-                                    ${book.author} ${book.title}
-                                    <button class='delete' value=${index++}>delete</button>
-                                   </div>`
-           }
-        })
+    updateBook(index){
+        this.#books[index].toggleRed()
 
-        container.innerHTML = `<div data-attribute='0' class='items'>
-                                ${author} ${title}
-                                <button class='delete' value='0'>delete</button>
-                               </div>
-                               ${container.innerHTML}`
     }
+  
     removeItem(btn){
         const items = document.querySelectorAll('.items');
         this.#books.splice(btn.value,1)
+        if (this.#books.length === 1){
+            this.#books = [];
+        }
         items.forEach((item)=>{
             if (item.dataset.attribute === btn.value) {
                 item.remove()
-            } else if (item.dataset.attribute > btn.value) {
-                btn.value -= 1
-                item.dataset.attribute -= 1
             }
-
         })
     }
 }
@@ -122,7 +109,7 @@ class BooksArray {
 const formValidator = new FormValidation(form),
 library = new BooksArray();
 
-library.loadBooks()
+//library.loadBooks()
 form.addEventListener('submit',(event)=>{
     event.preventDefault()
     
@@ -130,7 +117,7 @@ form.addEventListener('submit',(event)=>{
     console.log(formIsValid)
     if (formIsValid) {
         library.addBook();
-        library.liveAddBook();
+        library.displayBooks();
         
 
     } else {
@@ -142,8 +129,15 @@ form.addEventListener('submit',(event)=>{
 })
 
 container.addEventListener('click',(e)=>{
+    console.log(e.target.classList[0])
     if (e.target.value){
+        console.log(e.target.value)
+        if (e.target.classList[0] === 'delete') {
         library.removeItem(e.target)
+        } else {
+            library.updateBook(e.target.value)
+            
+        }
     }
 
 })
