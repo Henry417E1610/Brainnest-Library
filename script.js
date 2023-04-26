@@ -1,6 +1,8 @@
 const form = document.getElementById('form')
 //const submit = document.getElementById('submit-btn'),
 const deleteBtn = document.getElementsByClassName('delete');
+const local = document.getElementById('local');
+const save = JSON.parse(localStorage.getItem('save'))
 
 
 
@@ -76,8 +78,8 @@ class BooksArray {
         this.#books.forEach((book, index)=>{
            const {author,title, toggleRed, red } = book
 
-           container.innerHTML += `<div data-attribute=${index} >
-                                    '${author} ${title}' 
+           container.innerHTML += `<div data-attribute=${index} id=${index} class='items ${red}'>
+                                    <p>${author} ${title}<p>  
                                     <button class='delete' value=${index}>delete</button>
                                     <button class='toggle' value=${index}>
                                    </div>`
@@ -85,8 +87,27 @@ class BooksArray {
         })
     }
 
+    saveLocaly(){
+        localStorage.setItem('save',JSON.stringify(this.#books))
+    }
+
+    savedDisplay(){
+        const save = JSON.parse(localStorage.getItem('save'))
+        this.#books = save;
+        this.displayBooks()
+
+    }
+
     updateBook(index){
+        const element = document.getElementById(index)
         this.#books[index].toggleRed()
+        if (this.#books[index].red === false){
+            element.classList.remove('true')
+            element.classList.add('false')
+        } else {
+            element.classList.remove('false')
+            element.classList.add('true')
+        }
 
     }
   
@@ -108,8 +129,8 @@ class BooksArray {
 
 const formValidator = new FormValidation(form),
 library = new BooksArray();
+library.savedDisplay()
 
-//library.loadBooks()
 form.addEventListener('submit',(event)=>{
     event.preventDefault()
     
@@ -128,6 +149,8 @@ form.addEventListener('submit',(event)=>{
     
 })
 
+
+
 container.addEventListener('click',(e)=>{
     console.log(e.target.classList[0])
     if (e.target.value){
@@ -140,5 +163,9 @@ container.addEventListener('click',(e)=>{
         }
     }
 
+})
+
+local.addEventListener('click',()=>{
+    library.saveLocaly()
 })
 
