@@ -47,5 +47,5 @@ button {
 button:hover{ 
     background-color: white;
     color: darkolivegreen;
-    border: darkolivegreen;
+    border: 1px solid darkolivegreen;
 }
