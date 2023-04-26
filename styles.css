@@ -4,3 +4,48 @@
 .false {
     background-color: red;
 }
+
+form {
+    width: 65%;
+    background-color: aquamarine;
+    padding: 15px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    border-radius: 10px;
+}
+
+body {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 15vh;
+}
+
+body > * {
+    padding: 15px;
+}
+
+form > * {
+    padding: 10px;
+}
+
+button {
+    width: 150px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: darkolivegreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+button:hover{ 
+    background-color: white;
+    color: darkolivegreen;
+    border: darkolivegreen;
+}
