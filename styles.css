@@ -1,3 +1,51 @@
+body {
+    overflow-x: hidden;
+    width: 100vw;
+    min-height: 100vh;
+
+}
+
+.items {
+    width: 25vw;
+    height: 35vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.info {
+    height: 60%;
+}
+
+.delete {
+    background-color: black;
+}
+
+
+.items h2 {
+    height: 7vw;
+}
+
+.inner {
+    width: 90%;
+    height: 90%;
+    border: .5vw solid gold;
+    
+    
+}
+
+.error {
+    color: red;
+}
+.container {
+    width: 90vw;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 40vw;
+
+}
 .true {
     background-color: green;
 }
@@ -48,6 +96,17 @@ button {
     border-radius: 5px;
 }
 
+  .toggle {
+    background-color: rgb(54, 54, 226);
+  }
+  .controls {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 2vw;
+  }
+
 button:hover{ 
     background-color: white;
     color: darkolivegreen;
@@ -60,4 +119,48 @@ h1 {
                   1px 1px 0 #000,
                  1px -1px 0 #000,
                 -1px -1px 0 #000;
+}
+
+input:focus {
+    border: none;
+    outline: 1px solid blue;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+.error-input{
+    border: none;
+        outline: 1px solid red;
+}
+.error-input:focus {
+    border: none;
+    outline: 1px solid red;
+}
+
+.local {
+    position: fixed;
+    bottom: 2vw;
+    right: 2vw;
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%;
+    font-size: 1.5vw;
+}
+
+@media screen and (max-width: 1024px) {
+    .items {
+        height: 40vw;
+    }
+    .container {
+        grid-template-rows: 45vw;
+    }
+    
+}
+@media screen and (max-width:768px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 70vw;
+    }
+    .items {
+        width: 40vw;
+        height: 60vw;
+    }
 }
