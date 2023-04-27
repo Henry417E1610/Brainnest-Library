@@ -2,30 +2,76 @@ const form = document.getElementById('form')
 //const submit = document.getElementById('submit-btn'),
 const deleteBtn = document.getElementsByClassName('delete');
 const local = document.getElementById('local');
-const save = JSON.parse(localStorage.getItem('save'))
+const save = JSON.parse(localStorage.getItem('save'));
+
+const title = document.getElementById('title'),
+              author = document.getElementById('author');
+
+
 
 
 
 class FormValidation {
     constructor(form) {
         this.form = form;
-        this.errors = {};
+        this.errors = {author:'',title:''};
     };
-    validateInput(){
-        const title = document.getElementById('title'),
-              author = document.getElementById('author')
+
+    validateTitle(){
+        const title = document.getElementById('title')
+        const errorTitle = document.getElementById('error-title');
 
         if (!title.value.trim() || typeof title.value !== 'string'){
             this.errors.title = 'it has to have at least one character'
+            errorTitle.innerText = this.errors.title;
+            title.classList.add('error-input')
         } else {
             this.errors.title = ''
+            errorTitle.innerText = this.errors.title;
+            title.classList.remove('error-input')
         }
+    }
+    validateAuthor(){
+        const author = document.getElementById('author')
 
-        if (!author.value.trim().length > 1 || typeof author.value !== 'string'){
-            this.errors.author = 'it has to have at least one character'
+        const errorAuthor = document.getElementById('error-author');
+        if (author.value.trim().length <= 1 || typeof author.value !== 'string'){
+            this.errors.author = '*it has to have at least two character'
+            errorAuthor.innerText = this.errors.author;
+            author.classList.add('error-input');
         } else {
             this.errors.author = ''
+            errorAuthor.innerText = this.errors.author
+            author.classList.remove('error-input');
         };
+        
+
+    }
+    validateInput(){
+        const title = document.getElementById('title'),
+              author = document.getElementById('author')
+              const errorTitle = document.getElementById('error-title');
+const errorAuthor = document.getElementById('error-author');
+
+        if (!title.value.trim() || typeof title.value !== 'string'){
+            this.errors.title = '*it has to have at least one character'
+            title.classList.add('error-input')
+        } else {
+            this.errors.title = ''
+            title.classList.remove('error-input')
+        }
+
+        if (author.value.trim().length <= 1 || typeof author.value !== 'string'){
+            this.errors.author = '*it has to have at least two character'
+            author.classList.add('error-input')
+        } else {
+            author.classList.remove('error-input')
+            this.errors.author = ''
+        };
+        errorAuthor.innerText = this.errors.author
+        errorTitle.innerText = this.errors.title;
+        
+
 
         if  (this.errors.author === '' && this.errors.title === ''){
             return true
@@ -79,10 +125,21 @@ class BooksArray {
            const {author,title, toggleRed, red } = book
 
            container.innerHTML += `<div data-attribute=${index} id=${index} class='items ${red}'>
-                                    <p>${author} ${title}<p>  
-                                    <button class='delete' value=${index}>delete</button>
-                                    <button class='toggle' value=${index}>
-                                   </div>`
+                                        <div class='inner'>
+                                            <div class='info'>
+                                                <h2>${title}</h2>
+                                                <hr>
+                                                <h3>${author}</h3>
+                                            </div>
+                                            <div class='controls'> 
+                                             <div> 
+                                                <p>Did you red it?</p>
+                                                <button class='toggle' value=${index}>${red}</button>
+                                             </div>
+                                                <button class='delete' value=${index}>delete</button>
+                                            </div>
+                                        </div>
+                                    </div>`
            
         })
     }
@@ -93,34 +150,68 @@ class BooksArray {
 
     savedDisplay(){
         const save = JSON.parse(localStorage.getItem('save'))
-        this.#books = save;
+        console.log(save)
+        save.map(item =>{
+          const  {title, author, red} = item
+            this.#books.unshift(new Book(title,author,red))
+        })
+
         this.displayBooks()
 
     }
 
     updateBook(index){
+        console.log(this.#books)
         const element = document.getElementById(index)
+        const buton = element.querySelectorAll('.toggle')
         this.#books[index].toggleRed()
+        
+
         if (this.#books[index].red === false){
+            
+           
+
             element.classList.remove('true')
             element.classList.add('false')
+            
         } else {
             element.classList.remove('false')
             element.classList.add('true')
         }
+        buton.forEach((button)=>{
+            button.innerText = this.#books[index].red
+
+        })
+
+        
+    
+
 
     }
   
     removeItem(btn){
         const items = document.querySelectorAll('.items');
-        this.#books.splice(btn.value,1)
-        if (this.#books.length === 1){
+        const btns = document.querySelectorAll('.items button');
+if (this.#books.length === 1){
             this.#books = [];
         }
+        this.#books.splice(btn.value,1)
+        
         items.forEach((item)=>{
+            
             if (item.dataset.attribute === btn.value) {
                 item.remove()
+            } else if (item.dataset.attribute > btn.value) {
+                item.dataset.attribute--;  
+                item.id--;
             }
+        })
+        btns.forEach((botun)=>{
+            if (botun.value > btn.value){
+                botun.value--
+
+            }
+
         })
     }
 }
@@ -129,6 +220,14 @@ class BooksArray {
 
 const formValidator = new FormValidation(form),
 library = new BooksArray();
+title.addEventListener('input',()=>{
+    formValidator.validateTitle()
+})
+author.addEventListener('input',()=>{
+    formValidator.validateAuthor()
+})
+
+
 library.savedDisplay()
 
 form.addEventListener('submit',(event)=>{
@@ -167,5 +266,6 @@ container.addEventListener('click',(e)=>{
 
 local.addEventListener('click',()=>{
     library.saveLocaly()
+    alert('you saved changes to your collection!')
 })
 
