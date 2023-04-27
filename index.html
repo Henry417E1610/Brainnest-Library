@@ -9,16 +9,26 @@
     <title>Library</title>
 </head>
 <body>
+    <h1>Hello, there!<br>Do you have any books to share?</h1>
     <form id="form" action="submit">
-        <label for="title">*Title</label>
-        <input type="text" id="title" minlength="1">
-        <label for="author">*Author</label>
-        <input type="text" id="author" minlength="2">
-        <label for="red">*I've red this book:</label>
-        <input type="checkbox" name="" id="red" checked>
+        <div>
+            <label for="title">*Title: </label>
+            <input type="text" id="title" minlength="1">
+        </div>
+        <div>
+            <label for="author">*Author: </label>
+            <input type="text" id="author" minlength="2">
+        </div>
+        <div>
+            <label for="red">*I've read this book:</label>
+            <input type="checkbox" name="" id="red" checked>
+        </div>      
         <button type="submit"  id="submit-btn" title="complete form">ADD BOOK</button>
     </form>
     <div id="container"></div>
-    <button id="local">SAVE CHANGES</button>
+    <div class="save">
+        <button id="local">SAVE CHANGES</button>
+    </div>
+    
 </body>
 </html>
