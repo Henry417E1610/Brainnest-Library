@@ -52,7 +52,7 @@
 }
 
 form {
-    width: 30%;
+    width: 35%;
     background-color: aquamarine;
     padding: 15px;
     display: inline-block;
@@ -83,6 +83,19 @@ body > * {
 
 form > * {
     padding: 10px;
+}
+
+form > div { 
+    display: table-row;  
+}
+
+label { 
+    display: table-cell;
+    width: 40%; 
+}
+
+input { 
+    display: table-cell;
 }
 
 button {
