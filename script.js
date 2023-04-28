@@ -149,14 +149,18 @@ class BooksArray {
     }
 
     savedDisplay(){
+        if (localStorage.getItem('save') !== null){
         const save = JSON.parse(localStorage.getItem('save'))
         console.log(save)
         save.map(item =>{
           const  {title, author, red} = item
             this.#books.unshift(new Book(title,author,red))
+        
         })
+    
 
         this.displayBooks()
+    } else return;
 
     }
 
