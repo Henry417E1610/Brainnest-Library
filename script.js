@@ -190,7 +190,12 @@ class BooksArray {
             element.classList.add('true')
         }
         buton.forEach((button)=>{
-            button.innerText = this.#books[index].red
+            if (this.#books[index].red){
+                button.innerText = 'Yes';
+            }
+            else {
+                button.innerText = 'No';
+            }
 
         })
 

@@ -309,9 +309,13 @@ input:focus {
 @media screen and (max-width:390px) {
     .items {
         height: 170vw;
+        font-size: 1.5rem;
     }
     .container {
         margin-top: 10vw;
+    }
+    form {
+        font-size: 1.3rem;
     }
     
 }
