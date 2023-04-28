@@ -130,6 +130,20 @@ input:focus {
     width: 10vw;
     border-radius: 50%;
     font-size: 1.5vw;
+    
+}
+
+.appear {
+    animation: apear .5s ease-in-out;
+}
+@keyframes apear {
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(100%);
+    }
+    
 }
 
 @media screen and (max-width: 1024px) {

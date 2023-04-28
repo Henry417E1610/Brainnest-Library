@@ -122,7 +122,7 @@ class BooksArray {
         container.innerHTML = '';
 
         this.#books.forEach((book, index)=>{
-           const {author,title, toggleRed, red } = book
+           const {author,title, red } = book 
 
            container.innerHTML += `<div data-attribute=${index} id=${index} class='items ${red}'>
                                         <div class='inner'>
@@ -139,9 +139,17 @@ class BooksArray {
                                                 <button class='delete' value=${index}>delete</button>
                                             </div>
                                         </div>
-                                    </div>`
-           
+                                        </div>`
+        
+                                    
         })
+        
+    }
+
+    appearAnimation(index){
+        if (index === 0){
+
+        }
     }
 
     saveLocaly(){
