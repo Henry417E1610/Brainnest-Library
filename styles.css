@@ -1,0 +1,296 @@
+
+
+.items {
+    overflow-wrap: break-word;
+    width: 25vw;
+    height: 35vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.info {
+    height: 60%;
+}
+
+.delete {
+    background-color: black;
+}
+
+
+
+
+.items h2 {
+    height: 7vw;
+}
+
+.inner {
+    width: 90%;
+    height: 90%;
+    border: .5vw solid gold;
+    
+    
+}
+
+.error {
+    color: red;
+}
+.container {
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 20vw 20vw 20vw;
+    grid-template-rows: 30vw;
+    gap: 10vw;
+    
+   padding:auto;
+
+}
+.true {
+    background-color: green;
+}
+.false {
+    background-color: red;
+}
+
+form {
+    width: 30%;
+    background-color: aquamarine;
+    padding: 15px;
+    display: inline-block;
+    text-align: left;
+    border-radius: 10px;
+}
+
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 15vh;
+    background-image: url('./img/library.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+}
+
+
+body > * {
+    padding: 15px;
+}
+
+form > * {
+    padding: 10px;
+}
+
+button {
+    width: 150px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: darkolivegreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+  .toggle {
+    background-color: rgb(54, 54, 226);
+  }
+  .controls {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 2vw;
+  }
+
+button:hover{ 
+    background-color: white;
+    color: darkolivegreen;
+    border: 1px solid darkolivegreen;
+}
+
+h1 {
+    color: white;
+    text-shadow: -1px 1px 0 #000,
+                  1px 1px 0 #000,
+                 1px -1px 0 #000,
+                -1px -1px 0 #000;
+}
+input[type=text] {
+    width: 80%;
+    height: 1.5vw;
+    border-radius: 25px;
+}
+input:focus {
+    border: none;
+    outline: 1px solid blue;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+.error-input{
+    border: none;
+        outline: 1px solid red;
+}
+.error-input:focus {
+    border: none;
+    outline: 1px solid red;
+}
+.local {
+    position: fixed;
+    bottom: 2vw;
+    right: 2vw;
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%;
+    font-size: 1.5vw;
+}
+
+@media screen and (max-width: 1024px) {
+    .items {
+        height: 40vw;
+    }
+    .container {
+        grid-template-rows: 45vw;
+    }
+    
+}
+@media screen and (max-width: 912px){
+    .items {
+        height:50vw;
+        width: 30vw;
+    }
+    .container {
+        gap: 2.5vw;
+        grid-template-rows: 50vw;
+    }
+}
+@media screen and (max-width:768px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 70vw;
+    }
+    .items {
+        width: 40vw;
+        height: 60vw;
+    }
+}
+@media screen and (max-width: 540px) {
+    .items {
+        height: 80vw
+    }
+    .container {
+        margin-bottom: 10vw;
+        grid-template-rows: 90vw;
+    }
+    .local {
+        width: 20vw;
+        height: 20vw;
+        font-size: 1.2rem;
+    }
+
+    input[type=text]{
+        height: 2vw;
+    } 
+    
+    
+}
+
+@media screen and (max-width:414px) {
+    .container {
+        grid-template-columns: 80vw;
+        grid-template-rows: 160vw;
+        gap: 10vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .items {
+        width: 80vw;
+        height: 150vw;
+    }
+    body  {
+       margin-top: 0;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    form {
+        height: 120vw;
+        font-size: 2rem;
+        width: 101vw;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 0;
+    }
+
+    form div {
+        display: flex;
+        flex-direction: column;
+    }
+    .lastchild {
+        flex-direction: row;
+    }
+
+    
+    .error {
+        font-size: 1.2rem;
+    }
+
+    form button {
+        margin-top: 15vw;
+        width: 80vw;
+        align-self: center;
+        height: 10vw;
+        font-size: 1.5rem;
+    }
+    .checkbox {
+        height: 7vw;
+        width: 7vw;
+    }
+
+    input[type=text] {
+        height: 7vw;
+        font-size: 1.5rem;
+        width: 90vw;
+    }
+    .items{
+        font-size: 1.7rem;
+
+
+    }
+    .info h2{
+        margin-top: 5vw;
+        margin-bottom: 30vw;
+        
+    }
+
+    .controls button {
+        font-size: 1.5rem;
+        width: 60vw;
+        height: 10vw;
+    }
+    .local{
+        width: 25vw;
+        font-size: 1.2rem;
+        height: 25vw;
+    }
+}
+
+@media screen and (max-width:390px) {
+    .items {
+        height: 170vw;
+        font-size: 1.5rem;
+    }
+
+    .container {
+        margin-top: 10vw;
+    }
+    
+}
