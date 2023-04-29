@@ -123,6 +123,13 @@ class BooksArray {
 
         this.#books.forEach((book, index)=>{
            const {author,title, toggleRed, red } = book
+           var response = '';
+           if (red) {
+               response = 'Yes'
+           }
+           else {
+               response = 'No'
+           }
 
            container.innerHTML += `<div data-attribute=${index} id=${index} class=' items ${red}'>
                                         <div class='inner'>
@@ -133,10 +140,10 @@ class BooksArray {
                                             </div>
                                             <div class='controls'> 
                                              <div> 
-                                                <p>Did you red it?</p>
-                                                <button class='toggle' value=${index}>${red}</button>
+                                                <p>Did you read it?</p>
+                                                <button class='toggle' value=${index}>${response}</button>
                                              </div>
-                                                <button class='delete' value=${index}>delete</button>
+                                                <button class='delete' value=${index}>Delete</button>
                                             </div>
                                         </div>
                                     </div>`
@@ -188,7 +195,12 @@ class BooksArray {
             element.classList.add('true')
         }
         buton.forEach((button)=>{
-            button.innerText = this.#books[index].red
+            if (this.#books[index].red){
+                button.innerText = 'Yes';
+            }
+            else {
+                button.innerText = 'No';
+            }
 
         })
 
@@ -264,7 +276,9 @@ container.addEventListener('click',(e)=>{
     if (e.target.value){
         console.log(e.target.value)
         if (e.target.classList[0] === 'delete') {
-        library.removeItem(e.target)
+            if (confirm("Are you sure you would like to delete this book?")) {
+                library.removeItem(e.target)
+            }            
         } else {
             library.updateBook(e.target.value)
             
@@ -275,6 +289,6 @@ container.addEventListener('click',(e)=>{
 
 local.addEventListener('click',()=>{
     library.saveLocaly()
-    alert('you saved changes to your collection!')
+    alert('You saved changes to your collection!')
 })
 

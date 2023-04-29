@@ -54,7 +54,7 @@
 }
 
 form {
-    width: 30%;
+    width: 35%;
     background-color: aquamarine;
     padding: 15px;
     display: inline-block;
@@ -87,6 +87,19 @@ form > * {
     padding: 10px;
 }
 
+form > div { 
+    display: table-row;  
+}
+
+label { 
+    display: table-cell;
+    width: 40%; 
+}
+
+input { 
+    display: table-cell;
+}
+
 button {
     width: 150px;
     height: 25px;
@@ -115,6 +128,18 @@ button:hover{
     color: darkolivegreen;
     border: 1px solid darkolivegreen;
 }
+
+.toggle:hover {
+    background-color: white;
+    color: rgb(54, 54, 226);
+    border: 1px solid rgb(54, 54, 226);
+  }
+
+.delete:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
 
 h1 {
     color: white;
@@ -291,6 +316,9 @@ input:focus {
 
     .container {
         margin-top: 10vw;
+    }
+    form {
+        font-size: 1.3rem;
     }
     
 }
