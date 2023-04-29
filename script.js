@@ -123,7 +123,7 @@ class BooksArray {
 
         this.#books.forEach((book, index)=>{
            const {author,title, toggleRed, red } = book
-           var response = '';
+           let response = '';
            if (red) {
                response = 'Yes'
            }
