@@ -160,13 +160,13 @@ input:focus {
     }
     
 }
-@media screen and (max-width: 912px){
+@media screen and (max-width: 912px) and (orientation:portrait){
     .items {
         height:50vw;
         width: 30vw;
     }
     .container {
-        gap: 2.5vw;
+        gap: 12vw;
         grid-template-rows: 50vw;
     }
 }
