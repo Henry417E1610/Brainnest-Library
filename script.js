@@ -112,7 +112,7 @@ class BooksArray {
               red = document.getElementById('red');
 
               
-        this.#books.unshift(new Book(title.value,author.value,red.checked));
+        this.#books.unshift(new Book(title.value.trim().replace((/[\s]+/g),' '),author.value.trim().replace((/[\s]+/g),' '),red.checked));
         title.value = '';
         author.value = '';
         red.checked = true;
@@ -124,12 +124,12 @@ class BooksArray {
         this.#books.forEach((book, index)=>{
            const {author,title, toggleRed, red } = book
 
-           container.innerHTML += `<div data-attribute=${index} id=${index} class='items ${red}'>
+           container.innerHTML += `<div data-attribute=${index} id=${index} class=' items ${red}'>
                                         <div class='inner'>
                                             <div class='info'>
-                                                <h2>${title}</h2>
+                                                <h2></h2>
                                                 <hr>
-                                                <h3>${author}</h3>
+                                                <h3></h3>
                                             </div>
                                             <div class='controls'> 
                                              <div> 
@@ -140,6 +140,11 @@ class BooksArray {
                                             </div>
                                         </div>
                                     </div>`
+                                    const h2 = document.querySelector(`div[id='${index}'] h2`)
+                                    const h3 = document.querySelector(`div[id='${index}'] h3`)
+                                    h2.innerText = title;
+                                    h3.innerText = author;
+                            
            
         })
     }
@@ -154,7 +159,7 @@ class BooksArray {
         console.log(save)
         save.map(item =>{
           const  {title, author, red} = item
-            this.#books.unshift(new Book(title,author,red))
+            this.#books.push(new Book(title,author,red))
         
         })
     

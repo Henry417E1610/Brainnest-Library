@@ -1,6 +1,7 @@
 
 
 .items {
+    overflow-wrap: break-word;
     width: 25vw;
     height: 35vw;
     display: flex;
@@ -38,8 +39,9 @@
 .container {
     width: 90vw;
     display: grid;
-    grid-template-columns: 30vw 30vw 30vw;
-    grid-template-rows: 40vw;
+    grid-template-columns: 20vw 20vw 20vw;
+    grid-template-rows: 30vw;
+    gap: 10vw;
     
    padding:auto;
 
@@ -139,7 +141,6 @@ input:focus {
     border: none;
     outline: 1px solid red;
 }
-
 .local {
     position: fixed;
     bottom: 2vw;
@@ -260,13 +261,14 @@ input:focus {
         width: 90vw;
     }
     .items{
-        font-size: 2rem;
+        font-size: 1.7rem;
 
 
     }
     .info h2{
         margin-top: 5vw;
         margin-bottom: 30vw;
+        
     }
 
     .controls button {
@@ -284,7 +286,9 @@ input:focus {
 @media screen and (max-width:390px) {
     .items {
         height: 170vw;
+        font-size: 1.5rem;
     }
+
     .container {
         margin-top: 10vw;
     }
