@@ -1,12 +1,7 @@
 {
   
-  "scripts": {
   
-    
-  "test": "jest"
   
-  },
-    
   "devDependencies": {
   
     
@@ -22,18 +17,23 @@
   "jest": "^29.5.0",
   
     
-  "jest-environment-jsdom": "^29.5.0"
-
-
+  "jest-environment-jsdom": "^29.5.0",
+  
+    
+  "jsdom": "^22.0.0"
   
   },
-   "jest": {
+  
+  "jest": {
   
     
   "testEnvironment": "jsdom"
   
-  }
-
+  },
+  "scripts": {
   
- 
+    
+  "test": "jest"
+  
+  }
 }
