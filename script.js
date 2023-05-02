@@ -138,7 +138,7 @@ class BooksArray {
                                     const h2 = document.querySelector(`div[id='${index}'] h2`)
                                     const h3 = document.querySelector(`div[id='${index}'] h3`)
                                     h2.innerText = title;
-                                    h3.innerText = author; 
+                                    h3.innerText = author;
         })
     }
 
@@ -173,9 +173,6 @@ class BooksArray {
             element.classList.add('true')
         }
         buton.forEach((button)=>{
-<<<<<<< HEAD
-            button.innerText = this.#books[index].red
-=======
             if (this.#books[index].red){
                 button.innerText = 'Yes';
             }
@@ -183,7 +180,6 @@ class BooksArray {
                 button.innerText = 'No';
             }
 
->>>>>>> 4e01292798a2ea3d5ed781c462fa769a9f312ed3
         })
     }
   
@@ -254,5 +250,5 @@ local.addEventListener('click',()=>{
     alert('You saved changes to your collection!')
 })
 
-export { formValidator, title, author }
+export { formValidator }
 
