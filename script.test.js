@@ -49,7 +49,7 @@ test('both field mast be valid for form to be submitable',()=>{
         author.value = ''
 
     expect(formValidator.validateInput()).toBeFalsy();
-     title.value = 'aa'
+        title.value = 'aa'
         author.value = 'a'
 
     expect(formValidator.validateInput()).toBeFalsy();
@@ -57,8 +57,7 @@ test('both field mast be valid for form to be submitable',()=>{
         author.value = ''
 
     expect(formValidator.validateInput()).toBeFalsy();
-
-        title.value = ' '
+        title.value = ''
         author.value = 'aaaa'
 
     expect(formValidator.validateInput()).toBeFalsy();
@@ -68,14 +67,20 @@ test('both field mast be valid for form to be submitable',()=>{
 test('on submit, element with a class items is appended to the element with id container',()=>{
     const container = document.getElementById('container');
     const initialCount = container.childElementCount;
-validate(true);
-const secondCount = container.childElementCount;
-let difference = secondCount - initialCount;
-expect(difference).toBe(1);
-validate(false);
-const finalCount = container.childElementCount;
-difference = finalCount - secondCount;
-expect(difference).toBe(0);
+    const title = document.getElementById('title'),
+              author = document.getElementById('author'),
+              red = document.getElementById('red');
+    title.value = 'abandon'
+    author.value = 'abandon'
+    red.checked = true;
+    validate(true);
+    const secondCount = container.childElementCount;
+    let difference = secondCount - initialCount;
+    expect(difference).toBe(1);
+    validate(false);
+    const finalCount = container.childElementCount;
+    difference = finalCount - secondCount;
+    expect(difference).toBe(0);
 });
 
 test('on submit, new instance of book is created with values from the input fields ',()=>{
@@ -101,33 +106,22 @@ expect(button.textContent).toBe('Yes');
 });
 
 test('I can toggle red status of a book with specific index',()=>{
-    const title = document.getElementById('title'),
-              author = document.getElementById('author'),
-              red = document.getElementById('red');
-title.value = 'baba'
-author.value = 'autor'
-red.checked = true;
-validate(true);
-const button = document.querySelector('.toggle')
-expect(button.textContent).toBe('Yes');
-library.updateBook(0);
-expect(library.getBooks()[0].red).toBe(false);
-expect(button.textContent).toBe('No');
+    console.log(library.getBooks())
+    const button = document.querySelector('.toggle')
+    expect(button.textContent).toBe('Yes');
+    library.updateBook(0);
+    expect(library.getBooks()[0].red).toBe(false);
+    expect(button.textContent).toBe('No');
 })
+
 test('I can delete book with specific index',()=>{
-    const title = document.getElementById('title'),
-              author = document.getElementById('author'),
-              red = document.getElementById('red');
-title.value = 'baba'
-author.value = 'autor'
-red.checked = true;
-validate(true);
-const lengthOne = library.getBooks().length;
-library.removeItem(0);
-const lengthTwo = library.getBooks().length;
-const final = lengthTwo - lengthOne
-expect(final).toEqual(-1);
+    const lengthOne = library.getBooks().length;
+    library.removeItem(0);
+    const lengthTwo = library.getBooks().length;
+    const final = lengthTwo - lengthOne
+    expect(final).toEqual(-1);
 })
+
 test('I can save changes to local storage',()=>{
     library.saveLocaly();
     expect(JSON.parse(localStorage.getItem('save'))).toEqual(library.getBooks())
