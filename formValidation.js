@@ -1,4 +1,5 @@
 const form = document.getElementById('form');
+import { library } from "./Books.js";
 class FormValidation {
     constructor(form) {
         this.form = form;
@@ -10,10 +11,10 @@ class FormValidation {
         title = document.getElementById('title')
 
         if(this.errors.title){
-            errorTitle.innerText = this.errors.title;
+            errorTitle.textContent = this.errors.title;
             title.classList.add('error-input')
         } else {
-            errorTitle.innerText = this.errors.title;
+            errorTitle.textContent = this.errors.title;
             title.classList.remove('error-input');
         }
 
@@ -69,5 +70,14 @@ class FormValidation {
         }
     }
 };
+const validate = function(validator){
+     if (validator) {
+        library.addBook();
+        library.displayBooks();
+    } else {
+        console.log(Object.values(formValidator.errors))
+    }  
+};
 
-export const formValidator = new FormValidation(form);
+ const formValidator = new FormValidation(form);
+ export { formValidator, validate }

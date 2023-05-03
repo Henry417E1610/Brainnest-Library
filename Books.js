@@ -19,6 +19,10 @@ class Book{
 class BooksArray {
         #books = [];
 
+        getBooks(){
+            return this.#books
+        }
+
     addBook(){
         const title = document.getElementById('title'),
               author = document.getElementById('author'),
@@ -62,8 +66,8 @@ class BooksArray {
                                     </div>`
                                     const h2 = document.querySelector(`div[id='${index}'] h2`)
                                     const h3 = document.querySelector(`div[id='${index}'] h3`)
-                                    h2.innerText = title;
-                                    h3.innerText = author;
+                                    h2.textContent = title;
+                                    h3.textContent = author;
         })
     }
 
@@ -74,7 +78,7 @@ class BooksArray {
     savedDisplay(){
         if (localStorage.getItem('save') !== null){
         const save = JSON.parse(localStorage.getItem('save'))
-        console.log(save)
+    
         save.map(item =>{
           const  {title, author, red} = item
             this.#books.push(new Book(title,author,red))
@@ -99,10 +103,10 @@ class BooksArray {
         }
         buton.forEach((button)=>{
             if (this.#books[index].red){
-                button.innerText = 'Yes';
+                button.textContent = 'Yes';
             }
             else {
-                button.innerText = 'No';
+                button.textContent = 'No';
             }
 
         })

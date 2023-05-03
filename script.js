@@ -4,7 +4,8 @@ const form = document.getElementById('form'),
  local = document.getElementById('local'),
  title = document.getElementById('title'),
 author = document.getElementById('author');
-import { formValidator } from "./formValidation.js";
+
+import { formValidator, validate } from "./formValidation.js";
 import { library } from "./Books.js";
 
 author.addEventListener('input',()=>{
@@ -17,15 +18,8 @@ library.savedDisplay()
 
 form.addEventListener('submit',(event)=>{
     event.preventDefault()
-    
     const formIsValid = formValidator.validateInput();
-    console.log(formIsValid)
-    if (formIsValid) {
-        library.addBook();
-        library.displayBooks();
-    } else {
-        console.log(Object.values(formValidator.errors))
-    }  
+    validate(formIsValid);
 })
 
 container.addEventListener('click',(e)=>{
@@ -46,4 +40,5 @@ local.addEventListener('click',()=>{
     library.saveLocaly()
     alert('You saved changes to your collection!')
 })
+
 
