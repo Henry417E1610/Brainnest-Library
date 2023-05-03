@@ -4,8 +4,8 @@ const form = document.getElementById('form'),
  local = document.getElementById('local'),
  title = document.getElementById('title'),
 author = document.getElementById('author');
-import { formValidator } from "./formValidation";
-import { library } from "./Books";
+import { formValidator } from "./formValidation.js";
+import { library } from "./Books.js";
 
 author.addEventListener('input',()=>{
     formValidator.validateAuthor(author.value)

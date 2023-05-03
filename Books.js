@@ -132,6 +132,8 @@ if (this.#books.length === 1){
     }
 }
 
-export const library = new BooksArray();
+const library = new BooksArray();
+
+export {library, Book}
 
 
