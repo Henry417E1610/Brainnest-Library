@@ -53,6 +53,11 @@ test('both field mast be valid for form to be submitable',()=>{
 
     expect(formValidator.validateInput()).toBeFalsy();
 
+        title.value = ''
+        author.value = 'aaaa'
+
+    expect(formValidator.validateInput()).toBeFalsy();
+
 });
 
 
