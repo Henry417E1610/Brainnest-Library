@@ -2,38 +2,81 @@
   
   
   
-  "devDependencies": {
+ "devDependencies": {
   
-    
-  "@babel/core": "^7.21.5",
   
-    
-  "@babel/preset-env": "^7.21.5",
   
-    
-  "babel-jest": "^29.5.0",
+   
   
-    
-  "jest": "^29.5.0",
   
-    
-  "jest-environment-jsdom": "^29.5.0",
+ "@babel/core": "^7.21.5",
   
-    
-  "jsdom": "^22.0.0"
   
-  },
   
-  "jest": {
+   
   
-    
-  "testEnvironment": "jsdom"
   
-  },
-  "scripts": {
+ "@babel/preset-env": "^7.21.5",
   
-    
-  "test": "jest"
   
-  }
+  
+   
+  
+  
+ "babel-jest": "^29.5.0",
+  
+  
+  
+   
+  
+  
+ "jest": "^29.5.0",
+  
+  
+  
+   
+  
+  
+ "jest-environment-jsdom": "^29.5.0",
+  
+  
+  
+   
+  
+  
+ "jsdom": "^22.0.0"
+  
+  
+  
+ },
+  
+  
+  
+ "jest": {
+  
+  
+  
+   
+  
+  
+ "testEnvironment": "jsdom"
+  
+  
+  
+ },
+  
+  
+  
+ "scripts": {
+  
+  
+  
+   
+  
+  
+ "test": "jest"
+  
+  
+  
+ }
 }
