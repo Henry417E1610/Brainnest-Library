@@ -22,6 +22,7 @@ document.body.innerHTML = `<form id="form" action="submit" >
 
     import {formValidator, validate} from './formValidation'
     import {library, Book} from './Books'
+    const local = require('./script');
 
     
 
@@ -43,7 +44,8 @@ test('both field mast be valid for form to be submitable',()=>{
         title = document.getElementById('title');
         title.value = 'aaa'
         author.value = 'aa'
-
+        
+       
     expect(formValidator.validateInput()).toBeTruthy();
         title.value = ''
         author.value = ''
@@ -65,73 +67,139 @@ test('both field mast be valid for form to be submitable',()=>{
 
 });
 
-test('on submit, element with a class items is appended to the element with id container',()=>{
-    const container = document.getElementById('container');
-    const initialCount = container.childElementCount;
-validate(true);
-const secondCount = container.childElementCount;
+test('If form is valid.I can add book item to element with class container by clicking on button with id submit-btn',()=>{
+     const container = document.getElementById('container'),
+      author = document.getElementById('author'),
+        title = document.getElementById('title'),
+        submit = document.getElementById('submit-btn');
+        title.value = 'aaa'
+        author.value = 'aa'
+let initialCount = container.childElementCount
+submit.click();
+let secondCount = container.childElementCount;
 let difference = secondCount - initialCount;
-expect(difference).toBe(1);
-validate(false);
-const finalCount = container.childElementCount;
-difference = finalCount - secondCount;
-expect(difference).toBe(0);
+    expect(difference).toBe(1);
+});
+test('by clicking on button(#submit-btn) with invalid input I got error messages in elements #error-author and #error-title',()=>{
+const container = document.getElementById('container'),
+      author = document.getElementById('author'),
+        title = document.getElementById('title'),
+        submit = document.getElementById('submit-btn'),
+        errorAuthor = document.getElementById('error-author'),
+        errorTitle = document.getElementById('error-title');
+
+        title.value = 'aaa';
+        author.value = 'a';
+submit.click();
+expect(errorAuthor.textContent).toBeTruthy;
+expect(errorTitle.textContent).toBeFalsy;
+title.value = '  ';
+        author.value = 'aa';
+submit.click();
+expect(errorAuthor.textContent).toBeFalsy;
+expect(errorTitle.textContent).toBeTruthy;
+title.value = '  ';
+        author.value = 'a ';
+submit.click();
+expect(errorAuthor.textContent).toBeTruthy;
+expect(errorTitle.textContent).toBeTruthy;
 });
 
-test('on submit, new instance of book is created with values from the input fields ',()=>{
+test('by clicking on button(#submit-btn) with valid input I got no error messages in elements #error-author and #error-title',()=>{
+const container = document.getElementById('container'),
+      author = document.getElementById('author'),
+        title = document.getElementById('title'),
+        submit = document.getElementById('submit-btn'),
+        errorAuthor = document.getElementById('error-author'),
+        errorTitle = document.getElementById('error-title');
+
+        title.value = 'aaa';
+        author.value = 'aa';
+submit.click();
+expect(errorAuthor.textContent).toBeFalsy;
+expect(errorTitle.textContent).toBeFalsy;
+
+});
+
+
+test('by clicking on button(#submit-btn) with valid input I add element with a class\n .items to the .container, nested h2 contains title, h3 author  ',()=>{
    const title = document.getElementById('title'),
               author = document.getElementById('author'),
-              red = document.getElementById('red'),
- valTitile = 'baba',
- valAuthor = 'autor',
-valRed = true;
-title.value = valTitile
-author.value = valAuthor
-red.checked = valRed;
-validate(true)
+              submit = document.getElementById('submit-btn'),
+              valTitile = 'baba',
+              valAuthor = 'autor';
+              author.value = valAuthor;
+              title.value = valTitile;
+submit.click();
 const h2 = document.querySelector(`div[id='0'] h2`)
 const h3 = document.querySelector(`div[id='0'] h3`)
-const button = document.querySelector('.toggle')
-    expect(library.getBooks()[0]).toEqual({title:valTitile, author: valAuthor, red:valRed});
     expect(h2.textContent).toBe(valTitile);
 expect(h3.textContent).toBe(valAuthor);
-expect(button.textContent).toBe('Yes');
-
-
 });
 
-test('I can toggle red status of a book with specific index',()=>{
-    const title = document.getElementById('title'),
+test('by clicking on button(#submit-btn) if I check #red .toggle button`s textContent is yes, else it is No',()=>{
+const submit = document.getElementById('submit-btn'),
+              title = document.getElementById('title'),
               author = document.getElementById('author'),
               red = document.getElementById('red');
-title.value = 'baba'
-author.value = 'autor'
-red.checked = true;
-validate(true);
-const button = document.querySelector('.toggle')
-expect(button.textContent).toBe('Yes');
-library.updateBook(0);
-expect(library.getBooks()[0].red).toBe(false);
-expect(button.textContent).toBe('No');
+    title.value = 'aaa';
+    author.value = 'aa';
+submit.click();
+const button = document.querySelector(`div[id='0'] .toggle`);
+expect(button.innerHTML).toBe('Yes');
+title.value = 'nanna';
+    author.value = 'biba';
+    red.checked = false
+submit.click();
+const buttonTwo = document.querySelector(`div[id='0'] .toggle`);
+expect(buttonTwo.innerHTML).toBe('No')
+});
+
+test('I can toggle red status of a book with specific index by clicking on (#index .toggle) button',()=>{
+   
+const  button = document.querySelector(`div[id='0'] .toggle`);
+let previous = button.innerHTML;
+button.click();
+let updated = button.innerHTML;
+expect(updated).not.toBe(previous);
 })
-test('I can delete book with specific index',()=>{
-    const title = document.getElementById('title'),
+test('class true or false is added to items element based on red status',()=>{
+    const submit = document.getElementById('submit-btn'),
+              title = document.getElementById('title'),
               author = document.getElementById('author'),
               red = document.getElementById('red');
-title.value = 'baba'
-author.value = 'autor'
-red.checked = true;
-validate(true);
-const lengthOne = library.getBooks().length;
-library.removeItem(0);
-const lengthTwo = library.getBooks().length;
-const final = lengthTwo - lengthOne
-expect(final).toEqual(-1);
+            
+    title.value = 'aaa';
+    author.value = 'aa';
+submit.click();
+const element = document.querySelector(`.items`);
+expect(element.classList.contains('true')).toBeTruthy;
+expect(element.classList.contains('false')).toBeFalsy;
+title.value = 'svsd';
+    author.value = 'dadss';
+    red.checked = false
+submit.click();
+const elementTwo = document.querySelector('.items')
+expect(elementTwo.classList.contains('false')).toBeTruthy;
+expect(element.classList.contains('true')).toBeFalsy;
+
 })
-test('I can save changes to local storage',()=>{
-    library.saveLocaly();
+test('I can delete book by clicking on (#index .delete) button',()=>{
+     const delButton = document.querySelector(`div[id='0'] .delete`);
+              
+const lengthOne = container.childElementCount
+delButton.click()
+const lengthTwo = container.childElementCount;
+const final = lengthOne - lengthTwo
+expect(final).toEqual(1);
+})
+test('I can save changes to local storage by clicking #local button',()=>{
+    local.click()
     expect(JSON.parse(localStorage.getItem('save'))).toEqual(library.getBooks())
 })
+
+
+
 
 
 

@@ -27,9 +27,9 @@ container.addEventListener('click',(e)=>{
     if (e.target.value){
         console.log(e.target.value)
         if (e.target.classList[0] === 'delete') {
-            if (confirm("Are you sure you would like to delete this book?")) {
+           // if (confirm("Are you sure you would like to delete this book?")) {
                 library.removeItem(e.target)
-            }            
+            //}            
         } else {
             library.updateBook(e.target.value)
         }
@@ -38,7 +38,8 @@ container.addEventListener('click',(e)=>{
 
 local.addEventListener('click',()=>{
     library.saveLocaly()
-    alert('You saved changes to your collection!')
+    //alert('You saved changes to your collection!')
 })
+module.exports =  local, form ;
 
 
