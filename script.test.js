@@ -66,7 +66,6 @@ test('both field mast be valid for form to be submitable',()=>{
 
 });
 
-<<<<<<< HEAD
 test('If form is valid.I can add book item to element with class container by clicking on button with id submit-btn',()=>{
      const container = document.getElementById('container'),
       author = document.getElementById('author'),
@@ -103,25 +102,6 @@ title.value = '  ';
 submit.click();
 expect(errorAuthor.textContent).toBeTruthy;
 expect(errorTitle.textContent).toBeTruthy;
-=======
-test('on submit, element with a class items is appended to the element with id container',()=>{
-    const container = document.getElementById('container');
-    const initialCount = container.childElementCount;
-    const title = document.getElementById('title'),
-              author = document.getElementById('author'),
-              red = document.getElementById('red');
-    title.value = 'abandon'
-    author.value = 'abandon'
-    red.checked = true;
-    validate(true);
-    const secondCount = container.childElementCount;
-    let difference = secondCount - initialCount;
-    expect(difference).toBe(1);
-    validate(false);
-    const finalCount = container.childElementCount;
-    difference = finalCount - secondCount;
-    expect(difference).toBe(0);
->>>>>>> 6fa8e834ba7ad859a6b056894dda903ffc12e6c2
 });
 
 test('by clicking on button(#submit-btn) with valid input I got no error messages in elements #error-author and #error-title',()=>{
@@ -156,7 +136,6 @@ const h3 = document.querySelector(`div[id='0'] h3`)
 expect(h3.textContent).toBe(valAuthor);
 });
 
-<<<<<<< HEAD
 test('by clicking on button(#submit-btn) if I check #red .toggle button`s textContent is yes, else it is No',()=>{
 const submit = document.getElementById('submit-btn'),
               title = document.getElementById('title'),
@@ -215,27 +194,6 @@ expect(final).toEqual(1);
 })
 test('I can save changes to local storage by clicking #local button',()=>{
     local.click()
-=======
-test('I can toggle red status of a book with specific index',()=>{
-    console.log(library.getBooks())
-    const button = document.querySelector('.toggle')
-    expect(button.textContent).toBe('Yes');
-    library.updateBook(0);
-    expect(library.getBooks()[0].red).toBe(false);
-    expect(button.textContent).toBe('No');
-})
-
-test('I can delete book with specific index',()=>{
-    const lengthOne = library.getBooks().length;
-    library.removeItem(0);
-    const lengthTwo = library.getBooks().length;
-    const final = lengthTwo - lengthOne
-    expect(final).toEqual(-1);
-})
-
-test('I can save changes to local storage',()=>{
-    library.saveLocaly();
->>>>>>> 6fa8e834ba7ad859a6b056894dda903ffc12e6c2
     expect(JSON.parse(localStorage.getItem('save'))).toEqual(library.getBooks())
 })
 
