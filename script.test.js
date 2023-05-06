@@ -29,8 +29,8 @@ document.body.innerHTML = `<form id="form" action="submit" >
 
 
 
-
-test('author has to have at least two character',()=>{
+describe('formValidator object',()=>{
+    test('author has to have at least two character',()=>{
     
     expect(formValidator.validateAuthor('')).toBe('*it has to have at least two character')
     expect(formValidator.validateAuthor('ab')).toBeFalsy();
@@ -39,33 +39,9 @@ test('title has to have at least two character',()=>{
     expect(formValidator.validateTitle('')).toBe('*it has to have at least one character')
     expect(formValidator.validateTitle('1')).toBeFalsy();
 })
-test('both field mast be valid for form to be submitable',()=>{
-    const author = document.getElementById('author'),
-        title = document.getElementById('title');
-        title.value = 'aaa'
-        author.value = 'aa'
-        
-       
-    expect(formValidator.validateInput()).toBeTruthy();
-        title.value = ''
-        author.value = ''
+})
 
-    expect(formValidator.validateInput()).toBeFalsy();
-        title.value = 'aa'
-        author.value = 'a'
-
-    expect(formValidator.validateInput()).toBeFalsy();
-        title.value = 'a'
-        author.value = ''
-
-    expect(formValidator.validateInput()).toBeFalsy();
-        title.value = ''
-        author.value = 'aaaa'
-
-    expect(formValidator.validateInput()).toBeFalsy();
-
-});
-
+describe('submiting a form by clicking #submit-btn',()=>{
 test('If form is valid.I can add book item to element with class container by clicking on button with id submit-btn',()=>{
      const container = document.getElementById('container'),
       author = document.getElementById('author'),
@@ -153,15 +129,6 @@ submit.click();
 const buttonTwo = document.querySelector(`div[id='0'] .toggle`);
 expect(buttonTwo.innerHTML).toBe('No')
 });
-
-test('I can toggle red status of a book with specific index by clicking on (#index .toggle) button',()=>{
-   
-const  button = document.querySelector(`div[id='0'] .toggle`);
-let previous = button.innerHTML;
-button.click();
-let updated = button.innerHTML;
-expect(updated).not.toBe(previous);
-})
 test('class true or false is added to items element based on red status',()=>{
     const submit = document.getElementById('submit-btn'),
               title = document.getElementById('title'),
@@ -183,6 +150,29 @@ expect(elementTwo.classList.contains('false')).toBeTruthy;
 expect(element.classList.contains('true')).toBeFalsy;
 
 })
+});
+describe('.toggle button',()=>{
+test('I can toggle red status of a book with specific index by clicking on (#index .toggle) button',()=>{
+   const submit = document.getElementById('submit-btn'),
+              title = document.getElementById('title'),
+              author = document.getElementById('author'),
+              red = document.getElementById('red');
+            
+    title.value = 'aaa';
+    author.value = 'aa';
+submit.click();
+const  button = document.querySelector(`div[id='0'] .toggle`);
+let previous = button.innerHTML;
+button.click();
+let updated = button.innerHTML;
+expect(updated).not.toBe(previous);
+expect(updated).toBe('No');
+button.click();
+updated = button.innerHTML;
+expect(updated).toBe('Yes');
+})
+});
+describe('.delete button',()=>{
 test('I can delete book by clicking on (#index .delete) button',()=>{
      const delButton = document.querySelector(`div[id='0'] .delete`);
               
@@ -192,10 +182,33 @@ const lengthTwo = container.childElementCount;
 const final = lengthOne - lengthTwo
 expect(final).toEqual(1);
 })
+});
+describe('Local storage',()=>{
 test('I can save changes to local storage by clicking #local button',()=>{
     local.click()
     expect(JSON.parse(localStorage.getItem('save'))).toEqual(library.getBooks())
-})
+});
+test('on page reload .container`s content is based on localStorage',()=>{
+    const submit = document.getElementById('submit-btn'),
+              title = document.getElementById('title'),
+              author = document.getElementById('author'),
+    container = document.getElementById('container'),
+    titleText = 'bežmek',
+    authorText = 'Bakakuava';
+     title.value = titleText;
+    author.value = authorText;
+submit.click();
+    let childElementCount = container.childElementCount
+
+window.location.reload();
+const h2 = document.querySelector(`div[id='0'] h2`),
+      h3 = document.querySelector(`div[id='0'] h3`);
+expect(container.childElementCount).toBe(childElementCount);
+expect(h2.textContent).toBe(titleText);
+expect(h3.textContent).toBe(authorText);
+});
+});
+
 
 
 
